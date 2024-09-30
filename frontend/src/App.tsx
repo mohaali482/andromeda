@@ -1,8 +1,17 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Layout from "./pages/layout"
+import Home from "./pages/home"
+
+
 function App() {
   return (
-    <>
-      <p>Hello world</p>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
