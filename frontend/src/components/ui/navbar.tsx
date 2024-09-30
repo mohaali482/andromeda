@@ -19,27 +19,29 @@ export default function NavBar() {
                 />
                 <span className="font-bold ml-2">Andromeda</span>
             </Link>
-            <nav className="hidden lg:flex items-center space-x-4">
-                <Link
-                    to="/apod"
-                    className="text-sm font-medium hover:text-primary transition"
-                >
-                    APOD
-                </Link>
-                <Link
-                    to="/mars-rover-photos"
-                    className="text-sm font-medium hover:text-primary transition"
-                >
-                    Mars Rover Photos
-                </Link>
-                <Link
-                    to="/faq"
-                    className="text-sm font-medium hover:text-primary transition"
-                >
-                    FAQ
-                </Link>
-            </nav>
-            <ModeToggle />
+            <div className="flex gap-2 items-center">
+                <nav className="hidden lg:flex items-center space-x-4">
+                    <Link
+                        to="/apod"
+                        className="text-sm font-medium hover:text-primary transition"
+                    >
+                        APOD
+                    </Link>
+                    <Link
+                        to="/mars-rover-photos"
+                        className="text-sm font-medium hover:text-primary transition"
+                    >
+                        Mars Rover Photos
+                    </Link>
+                    <Link
+                        to="/faq"
+                        className="text-sm font-medium hover:text-primary transition"
+                    >
+                        FAQ
+                    </Link>
+                </nav>
+                <ModeToggle />
+            </div>
         </header>
     )
 }
