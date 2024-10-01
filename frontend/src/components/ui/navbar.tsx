@@ -7,7 +7,7 @@ import { ModeToggle } from "../mode-toggle"
 
 export default function NavBar() {
     return (
-        <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between px-4 backdrop-filter backdrop-blur-lg bg-opacity-30 md:px-6">
+        <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between px-4 backdrop-filter backdrop-blur-lg bg-background/30 md:px-6 mb-2">
             <MobileSidebar />
             <Link to="/" className="hidden lg:flex lg:items-center">
                 <img
@@ -19,7 +19,7 @@ export default function NavBar() {
                 />
                 <span className="font-bold ml-2">Andromeda</span>
             </Link>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center text-foreground">
                 <nav className="hidden lg:flex items-center space-x-4">
                     <Link
                         to="/apod"
@@ -50,7 +50,7 @@ function MobileSidebar() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="lg:hidden">
+                <Button variant="outline" size="icon" className="bg-transparent lg:hidden">
                     <MenuIcon className="h-6 w-6" />
                     <span className="sr-only">Toggle navigation menu</span>
                 </Button>
