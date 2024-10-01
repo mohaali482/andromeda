@@ -16,13 +16,13 @@
     --secondary-foreground: 234 67% 19%;
     --muted: 30 20% 20%;
     --muted-foreground: 234 67% 70%;
-    --accent: 59 95% 92%;
-    --accent-foreground: 234 67% 19%;
+    --accent: 234 68% 19%;
+    --accent-foreground: 59 95% 92%;
     --destructive: 0 85% 60%;
     --destructive-foreground: 234 67% 19%;
     --border: 30 20% 20%;
     --input: 30 20% 20%;
-    --ring: 59 95% 40%;
+    --ring: 53 100% 40%;
     --radius: 0.5rem;
   }
 
@@ -39,13 +39,13 @@
     --secondary-foreground: 234 67% 81%;
     --muted: 30 20% 80%;
     --muted-foreground: 234 67% 81%;
-    --accent: 58 95% 8%;
-    --accent-foreground: 234 67% 81%;
+    --accent: 234 68% 81%;
+    --accent-foreground: 30 20% 2%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 233 69% 10%;
     --border: 30 20% 60%;
     --input: 30 20% 80%;
-    --ring: 58 95% 60%;
+    --ring: 53 100% 60%;
   }
 }
 
@@ -56,4 +56,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.explanation::first-letter {
+  initial-letter: 2;
+}
+
+.copyright::before {
+  content: "©";
 }
