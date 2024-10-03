@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import 'react-photo-view/dist/react-photo-view.css';
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useGetApod } from "@/hooks/useGetApod";
