@@ -1,4 +1,5 @@
 export type ApodData = {
+  copyright: string;
   date: string;
   explanation: string;
   hdurl: string;
@@ -6,10 +7,4 @@ export type ApodData = {
   service_version: string;
   title: string;
   url: string;
-};
-
-export type Config = {
-  apiKey: string;
-  nasaURL: string;
-  port: string;
 };

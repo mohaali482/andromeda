@@ -1,5 +1,6 @@
 import { Redis } from "@upstash/redis";
-import { ApodData, Config } from "../types";
+import { Config } from "../types/config";
+import { ApodData } from "../types/apod";
 
 export default function apodHandler(redis: Redis, config: Config) {
   return async (req, res) => {
@@ -21,27 +22,41 @@ export default function apodHandler(redis: Redis, config: Config) {
       return;
     }
 
-    const cachedData: ApodData | null = await redis.get(`apod-${reqDate}`);
-    if (cachedData) {
-      console.log("APOD Data found in cache", reqDate);
-      res.json(cachedData);
+    try {
+      const cachedData: ApodData | null = await redis.get(`apod-${reqDate}`);
+      if (cachedData) {
+        console.log("APOD Data found in cache", reqDate);
+        res.json(cachedData);
+        return;
+      }
+    } catch (e) {
+      console.log("Error fetching APOD data from cache", e);
+    }
+
+    let data: ApodData;
+    try {
+      const response = await fetch(
+        `${config.nasaURL}/planetary/apod?api_key=${config.apiKey}&date=${reqDate}`
+      );
+
+      if (!response.ok) {
+        console.log("Error fetching APOD data", response.statusText);
+        res.status(response.status).json({ error: response.statusText });
+        return;
+      }
+      data = await response.json();
+    } catch (e) {
+      console.log("Error fetching APOD data", e);
+      res.status(500).json({ error: "Error fetching APOD data" });
       return;
     }
 
-    const response = await fetch(
-      `${config.nasaURL}/planetary/apod?api_key=${config.apiKey}&date=${reqDate}`
-    );
-
-    if (!response.ok) {
-      console.log("Error fetching APOD data", response.statusText);
-      res.status(response.status).json({ error: response.statusText });
-      return;
+    try {
+      await redis.set(`apod-${reqDate}`, data);
+      console.log("APOD Data saved in cache", reqDate);
+    } catch (e) {
+      console.log("Error saving APOD data in cache", e);
     }
-
-    const data: ApodData = await response.json();
-
-    await redis.set(`apod-${reqDate}`, data);
-    console.log("APOD Data saved in cache", reqDate);
     res.json(data);
   };
 }
