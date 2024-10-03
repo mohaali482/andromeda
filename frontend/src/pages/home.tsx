@@ -1,52 +1,112 @@
-import { ArrowLeftCircle, ArrowRightCircle } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import 'react-photo-view/dist/react-photo-view.css';
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { useGetApod } from "@/hooks/useGetApod";
+import LoadingPopup from "@/components/loading-popup";
 
 export default function Home() {
-    const title = "Comet Tsuchinshan-ATLAS over Mexico"
-    const text = "The new comet has passed its closest to the Sun and is now moving closer to the Earth. C/2023 A3 (Tsuchinshan–ATLAS) is currently moving out from inside the orbit of Venus and on track to pass its nearest to the Earth in about two weeks.  Comet Tsuchinshan-ATLAS, pronounced \"Choo-cheen-shahn At-less,\", is near naked-eye visibility and easily picked up by long-exposure cameras.  The comet can also now be found by observers in Earth's northern hemisphere as well as the south.  The featured image was captured just a few days ago above Zacatecas, Mexico. Because clouds were obscuring much of the pre-dawn sky, the astrophotographer released a drone to take pictures from higher up, several of which were later merged to enhance the comet's visibility. Although the future brightness of comets is hard to predict, there is increasing hope that Comet Tsuchinshan-ATLAS will further brighten as it enters the early evening sky.   Growing Gallery: Comet Tsuchinsan-ATLAS in 2024"
-    const copyright = "\nDaniel Korona\n";
-    const date = new Date("2024-09-30").toDateString();
-    const media_type = "video"
-    const url = "https://www.youtube.com/embed/ExGvwNuKyMc?ref=0"
-    const prevURL = "some-url"
-    const nextURL = "some-url"
+    const today = new Date();
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    const { error, data, status, refetch } = useGetApod(searchParams.get("date") || today.toISOString().split("T")[0]);
+    const date = new Date(searchParams.get("date") || today);
+    date.setDate(date.getDate() + 1);
+    const hasNext = date <= today;
+
+    const prevDate = () => {
+        const date = new Date(searchParams.get("date") || today);
+        date.setDate(date.getDate() - 1);
+        setSearchParams({ date: date.toISOString().split("T")[0] });
+    }
+
+    const nextDate = () => {
+        const date = new Date(searchParams.get("date") || today);
+        date.setDate(date.getDate() + 1);
+        setSearchParams({ date: date.toISOString().split("T")[0] });
+    }
+
+    if (status === "error") {
+        if (error) {
+            return (
+                <div>
+                    <div className="flex justify-between my-4">
+                        <Button onClick={prevDate}>Prev</Button>
+                        <Button onClick={nextDate} disabled={!hasNext}>Next</Button>
+                    </div>
+                    <div className="flex flex-col justify-center items-center bg-background/85 rounded-lg py-8">
+                        <h1 className="text-2xl font-bold text-center my-4 text-red-400">Error</h1>
+                        <p className="px-8 leading-7 font font-serif mb-2">
+                            {error.message}
+                        </p>
+                        <Button onClick={() => refetch()} className="w-fit">Retry</Button>
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <div className="flex justify-between my-4">
+                    <Button onClick={prevDate}>Prev</Button>
+                    <Button onClick={nextDate} disabled={!hasNext}>Next</Button>
+                </div>
+                <div className="flex flex-col justify-center items-center bg-background/85 rounded-lg py-8">
+                    <h1 className="text-2xl font-bold text-center my-4 text-red-400">Error</h1>
+                    <p className="px-8 leading-7 font font-serif mb-2">
+                        An error occurred
+                    </p>
+                    <Button onClick={refetch} className="w-fit">Retry</Button>
+                </div>
+            </div>
+        )
+    }
+
+    if (status === "pending") {
+        return <LoadingPopup open />
+    }
+
+    if (!data) {
+        return <div>Error</div>
+    }
 
     return (
         <div>
-            <div className="flex justify-between my-4 lg:hidden">
-                <Link to="/" className={buttonVariants({ variant: "default" })}>Prev</Link>
-                <Link to="/" className={buttonVariants({ variant: "default" })}>Next</Link>
+            <div className="flex justify-between my-4">
+                <Button onClick={prevDate}>Prev</Button>
+                <Button onClick={nextDate} disabled={!hasNext}>Next</Button>
             </div>
-            <div className="flex gap-2 items-center">
-                <Link className="hidden lg:block" to="/"><ArrowLeftCircle size={40} /></Link>
-                <div className="flex flex-col-reverse lg:flex-row justify-between items-stretch gap-2 pb-16 w-full">
-                    <div className="self-stretch bg-accent/65 rounded-lg w-full lg:w-1/2 flex flex-col justify-center items-center text-accent-foreground py-8">
-                        <h1 className="text-2xl font-bold text-center my-4">{title}</h1>
-                        <p className="px-8 italic leading-7 font explanation font-serif mb-2">
-                            {text}
-                        </p>
-                        <p className="text-sm italic font-bold copyright">{copyright}</p>
-                        <p className="text-sm italic">{date}</p>
-                    </div>
+            <div className="flex flex-col-reverse lg:flex-row justify-between items-stretch gap-2 pb-16 w-full">
+                <div className="self-stretch bg-accent/65 rounded-lg w-full lg:w-1/2 flex flex-col justify-center items-center text-accent-foreground py-8">
+                    <h1 className="text-2xl font-bold text-center my-4">{data.title}</h1>
+                    <p className="px-8 italic leading-7 font explanation font-serif mb-2">
+                        {data.explanation}
+                    </p>
+                    <p className="text-sm italic font-bold copyright">{data.copyright}</p>
+                    <p className="text-sm italic">{new Date(data.date).toDateString()}</p>
+                </div>
 
-                    <div className="w-full min-h-full self-stretch lg:w-1/2 flex justify-center items-center">
-                        {media_type === "video" ?
-                            (
-                                <iframe src={url} className="min-h-[calc(50dvh)] min-w-full" allowFullScreen />
-                            ) : (
+                <div className="w-full min-h-full self-stretch lg:w-1/2 flex justify-center items-center">
+                    {data.media_type === "video" ?
+                        (
+                            <iframe src={data.url} className="min-h-[calc(50dvh)] min-w-full" allowFullScreen />
+                        ) : (
+                            <div className="flex flex-col gap-2">
                                 <PhotoProvider>
-                                    <PhotoView src={url}>
-                                        <img className="rounded-lg h-full overflow-x-hidden object-contain" src={url} />
+                                    <PhotoView src={data.url}>
+                                        <img className="rounded-lg h-full overflow-x-hidden object-contain" src={data.url} />
                                     </PhotoView>
                                 </PhotoProvider>
-                            )
-                        }
-                    </div>
+
+                                <a href={data.hdurl} target="_blank"
+                                    className={buttonVariants({ variant: "default", className: "w-fit mx-auto" })}
+                                ><ExternalLink size={18} className="mr-2" /> HD image
+                                </a>
+                            </div>
+                        )
+                    }
                 </div>
-                <Link className="hidden lg:block" to="/"><ArrowRightCircle size={40} /></Link>
             </div>
         </div>
     )

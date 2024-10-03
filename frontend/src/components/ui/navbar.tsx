@@ -22,7 +22,7 @@ export default function NavBar() {
             <div className="flex gap-2 items-center text-foreground">
                 <nav className="hidden lg:flex items-center space-x-4">
                     <Link
-                        to="/apod"
+                        to="/"
                         className="text-sm font-medium hover:text-primary transition"
                     >
                         APOD
@@ -69,7 +69,7 @@ function MobileSidebar() {
                 <SheetDescription />
                 <div className="grid gap-4 py-6">
                     <Link
-                        to="/apod"
+                        to="/"
                         className="flex items-center text-sm font-medium hover:text-primary transition"
                     >
                         APOD

@@ -10,7 +10,7 @@ export default function Layout() {
                 backgroundColor: "#2F1E23"
             }}>
             <NavBar />
-            <main className="px-4 h-full lg:px-16">
+            <main className="px-4 min-h-[calc(80dvh)] lg:px-16">
                 <Outlet />
             </main>
             <Footer />
