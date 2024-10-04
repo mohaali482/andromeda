@@ -1,4 +1,3 @@
-import { GitHubLogoIcon, PersonIcon } from "@radix-ui/react-icons";
 import { BriefcaseBusiness, Github, Linkedin } from "lucide-react";
 
 export default function Footer() {
