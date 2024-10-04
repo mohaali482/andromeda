@@ -34,10 +34,10 @@ export default function NavBar() {
                         Mars Rover Photos
                     </Link>
                     <Link
-                        to="/faq"
+                        to="/about"
                         className="text-sm font-medium hover:text-primary transition"
                     >
-                        FAQ
+                        About
                     </Link>
                 </nav>
                 <ModeToggle />
@@ -81,10 +81,10 @@ function MobileSidebar() {
                         Mars Rover Photos
                     </Link>
                     <Link
-                        to="/faq"
+                        to="/about"
                         className="flex items-center text-sm font-medium hover:text-primary transition"
                     >
-                        FAQ
+                        About
                     </Link>
                 </div>
             </SheetContent>
