@@ -4,16 +4,18 @@ import { Redis } from "@upstash/redis";
 import { apiKey, nasaURL, port, redisToken, redisURL } from "./config";
 import logger from "./middlewares/logger";
 import apodHandler from "./controllers/apod";
+import marsRoverPhotosHandler from "./controllers/mars-rover-photos";
+import { Config } from "./types/config";
 
 const redis = new Redis({
   url: redisURL,
   token: redisToken,
 });
 
-const config = {
+const config: Config = {
   apiKey,
   nasaURL,
-  port: port,
+  port,
 };
 
 const app = express();
@@ -25,6 +27,7 @@ app.use(cors());
 app.use(logger());
 
 app.get("/apod", apodHandler(redis, config));
+app.get("/mars/:rover/photos", marsRoverPhotosHandler(redis, config));
 
 app.listen(port, () => {
   return console.log(`http://localhost:${port}`);
