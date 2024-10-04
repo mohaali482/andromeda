@@ -110,7 +110,7 @@ export default function marsRoverPhotosHandler(redis: Redis, config: Config) {
     }
 
     const params = new URLSearchParams();
-    params.append("api_key", config.apiKey);
+    params.append("api_key", config.nasaApiKey);
     params.append("page", pageQuery);
 
     if (cameraQuery && cameraQuery !== "all") {

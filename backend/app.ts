@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import { Redis } from "@upstash/redis";
-import { apiKey, nasaURL, port, redisToken, redisURL } from "./config";
+import { nasaApiKey, nasaURL, port, redisToken, redisURL } from "./config";
 import logger from "./middlewares/logger";
 import apodHandler from "./controllers/apod";
 import marsRoverPhotosHandler from "./controllers/mars-rover-photos";
@@ -13,7 +13,7 @@ const redis = new Redis({
 });
 
 const config: Config = {
-  apiKey,
+  nasaApiKey,
   nasaURL,
   port,
 };

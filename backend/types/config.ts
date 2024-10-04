@@ -1,5 +1,5 @@
 export type Config = {
-  apiKey: string;
+  nasaApiKey: string;
   nasaURL: string;
   port: string;
 };

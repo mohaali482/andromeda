@@ -36,7 +36,7 @@ export default function apodHandler(redis: Redis, config: Config) {
     let data: ApodData;
     try {
       const response = await fetch(
-        `${config.nasaURL}/planetary/apod?api_key=${config.apiKey}&date=${reqDate}`
+        `${config.nasaURL}/planetary/apod?api_key=${config.nasaApiKey}&date=${reqDate}`
       );
 
       if (!response.ok) {
