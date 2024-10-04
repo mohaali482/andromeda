@@ -7,7 +7,13 @@ import {
 } from '@tanstack/react-query'
 import MarsRoverPhotos from "./pages/mars-rover-photos"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 function App() {
   return (
