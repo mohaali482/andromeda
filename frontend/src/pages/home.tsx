@@ -5,6 +5,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useGetApod } from "@/hooks/useGetApod";
 import LoadingPopup from "@/components/loading-popup";
+import { useEffect } from "react";
 
 export default function Home() {
     const today = new Date();
@@ -26,6 +27,12 @@ export default function Home() {
         date.setDate(date.getDate() + 1);
         setSearchParams({ date: date.toISOString().split("T")[0] });
     }
+
+    useEffect(() => {
+        if (searchParams.get("date") === null) {
+            setSearchParams({ date: today.toISOString().split("T")[0] });
+        }
+    }, [])
 
     if (status === "error") {
         if (error) {
