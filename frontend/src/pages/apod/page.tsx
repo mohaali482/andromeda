@@ -7,7 +7,7 @@ import { useGetApod } from "@/hooks/useGetApod";
 import { useEffect } from "react";
 import { LoadingSpinner } from "@/components/loading-spinner";
 
-export default function Home() {
+export default function Page() {
     const today = new Date();
 
     const [searchParams, setSearchParams] = useSearchParams()

@@ -1,4 +1,4 @@
-import Home from "./home";
+import Page from "./page";
 
 export default function APOD() {
     return (
@@ -9,7 +9,7 @@ export default function APOD() {
                     <p className="text-primary-foreground dark:text-primary">Discover the Wonders of the Universe: A New Space Image Every Day</p>
                 </div>
             </div>
-            <Home />
+            <Page />
         </div>
     )
 }

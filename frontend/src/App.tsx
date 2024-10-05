@@ -6,7 +6,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import MarsRoverPhotos from "./pages/mars-rover-photos"
-import APOD from "./pages/apod"
+import APOD from "./pages/apod/layout"
 
 const queryClient = new QueryClient({
   defaultOptions: {
