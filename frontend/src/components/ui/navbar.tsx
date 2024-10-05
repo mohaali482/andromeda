@@ -17,9 +17,9 @@ export default function NavBar() {
                     width={24}
                     height={24}
                 />
-                <span className="font-bold ml-2">Andromeda</span>
+                <span className="font-bold ml-2 text-primary-foreground dark:text-foreground">Andromeda</span>
             </Link>
-            <div className="flex gap-2 items-center text-foreground">
+            <div className="flex gap-2 items-center text-primary-foreground dark:text-foreground">
                 <nav className="hidden lg:flex items-center space-x-4">
                     <Link
                         to="/"

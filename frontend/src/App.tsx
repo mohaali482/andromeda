@@ -7,6 +7,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import MarsRoverPhotos from "./pages/mars-rover-photos"
+import APOD from "./pages/apod"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +24,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<APOD />} />
             <Route path="/mars-rover-photos" element={<MarsRoverPhotos />} />
           </Route>
         </Routes>
