@@ -1,3 +1,8 @@
+export type Rover = {
+  name: string;
+  cameras: string[];
+};
+
 type MarsRoverPhotosData = {
   id: number;
   sol: number;
