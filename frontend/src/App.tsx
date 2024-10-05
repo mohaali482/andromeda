@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Layout from "./pages/layout"
-import Home from "./pages/home"
 import {
   QueryClient,
   QueryClientProvider,
