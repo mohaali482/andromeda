@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Page() {
     return (
         <div className="flex flex-col-reverse items-center gap-4 my-8 md:flex-row md:justify-between">
-            <div className="bg-accent/65 rounded-lg max-w-full w-fit h-full text-accent-foreground py-4 px-4">
+            <div className="italic bg-accent/65 rounded-lg max-w-full w-fit h-full text-accent-foreground py-4 px-4">
                 <h1 className="text-3xl font-bold">Welcome to the Andromeda</h1>
                 <p>Explore the Universe. Discover breathtaking images and data from NASA</p>
                 <div className="flex gap-4 mt-8 flex-col md:flex-row">
