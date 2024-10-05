@@ -7,7 +7,7 @@ import { RoverList } from "@/constants/data";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export default function MarsRoverPhotos() {
+export default function Page() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [selectedItem, setSelectedItem] = useState<string>(searchParams.get("rover")?.toLowerCase() || "curiosity");
@@ -40,13 +40,6 @@ export default function MarsRoverPhotos() {
 
     return (
         <div>
-            <div className="flex flex-col-reverse gap-4 mt-8 md:flex-row md:justify-between">
-                <div>
-                    <h1 className="text-3xl font-bold text-primary-foreground dark:text-primary">Mars Rover Photos</h1>
-                    <p className="text-primary-foreground dark:text-primary">Explore Mars Through the Eyes of Our Rovers: Select a Rover to View Mission Photos</p>
-                </div>
-                <img src="/images/mars.gif" alt="Mars" width={100} />
-            </div>
             <div className="flex flex-wrap items-center gap-4 justify-center md:justify-between my-8">
                 <div className="container mx-auto px-4 py-8">
                     <RadioGroup
