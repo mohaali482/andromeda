@@ -68,6 +68,13 @@ export default function PhotoGallery() {
                     ))}
                 </PhotoProvider>
             </div>
+            {
+                status === "success" && data?.photos.length === 0 && (
+                    <div className="flex items-center justify-center bg-accent/65 rounded-lg w-full h-fit py-8 text-accent-foreground">
+                        No photos found
+                    </div>
+                )
+            }
         </div>
     );
 }
