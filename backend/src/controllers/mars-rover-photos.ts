@@ -1,7 +1,6 @@
 import { Redis } from "@upstash/redis";
 import { Request, Response } from "express";
 import { Config } from "../types/config";
-import { MarsRoverResponse } from "../types/mars-rover-photos";
 import {
   validateCamera,
   validateEarthDate,
