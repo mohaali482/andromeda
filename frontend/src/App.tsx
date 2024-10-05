@@ -8,6 +8,7 @@ import {
 import APOD from "./pages/apod/layout"
 import MarsRoverPhotos from "./pages/mars-rover-photos/layout"
 import About from "./pages/about/layout"
+import Home from "./pages/home/layout"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +25,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
             <Route path="/apod" element={<APOD />} />
             <Route path="/mars-rover-photos" element={<MarsRoverPhotos />} />
             <Route path="/about" element={<About />} />
