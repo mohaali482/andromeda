@@ -20,7 +20,7 @@ export default function NavBar() {
                 <span className="font-bold ml-2 text-primary-foreground dark:text-foreground">Andromeda</span>
             </Link>
             <div className="flex gap-2 items-center text-primary-foreground dark:text-foreground">
-                <nav className="hidden lg:flex items-center space-x-4">
+                <nav className="hidden lg:flex items-center space-x-6 mr-6">
                     <Link
                         to="/apod"
                         className="text-sm font-medium hover:text-primary transition"
