@@ -9,7 +9,6 @@ import { useSearchParams } from "react-router-dom";
 
 export default function Page() {
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [selectedItem, setSelectedItem] = useState<string>(searchParams.get("rover")?.toLowerCase() || "curiosity");
 
     const rover = RoverList.find((rover) => rover.name === selectedItem);
@@ -33,6 +32,14 @@ export default function Page() {
         const page = searchParams.get("page")
         if (!page || Number.isNaN(parseInt(page)) || parseInt(page) < 1) {
             searchParams.set("page", "1");
+        }
+
+        if (searchParams.get("earth_date")) {
+            searchParams.delete("sol");
+        } else if (searchParams.get("sol")) {
+            searchParams.delete("earth_date");
+        } else {
+            searchParams.set("sol", "1000");
         }
 
         setSearchParams(searchParams);
