@@ -7,6 +7,7 @@ export default function MarsRoverPhotos() {
                 <div>
                     <h1 className="text-3xl font-bold text-primary-foreground dark:text-primary">Mars Rover Photos</h1>
                     <p className="text-primary-foreground dark:text-primary">Explore Mars Through the Eyes of Our Rovers: Select a Rover to View Mission Photos</p>
+                    <p className="text-primary-foreground dark:text-primary">Click on an image to explore it in full detail.</p>
                 </div>
                 <img src="/images/mars.gif" alt="Mars" width={100} />
             </div>
