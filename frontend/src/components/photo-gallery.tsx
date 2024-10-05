@@ -43,8 +43,13 @@ export default function PhotoGallery() {
 
     return (
         <div className="w-full min-h-full">
-            {status === "pending" && <LoadingSpinner className="m-auto" />}
-            {status === "error" && <p>{error.message} <Button onClick={() => refetch()}>Retry</Button></p>}
+            {status === "pending" && <LoadingSpinner className="m-auto text-white" />}
+            {status === "error" && (
+                <div className="flex flex-col items-center m-auto text-primary-foreground dark:text-primary text-lg">
+                    {error.message}
+                    <Button className="w-fit" onClick={() => refetch()}>Retry</Button>
+                </div>
+            )}
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
                 <PhotoProvider>
                     {status === "success" && data?.photos.map((photo) => (
@@ -53,7 +58,7 @@ export default function PhotoGallery() {
                                 <img
                                     src={photo.img_src}
                                     alt={photo.camera.full_name}
-                                    className="w-full h-64 object-cover"
+                                    className="w-full h-64 object-cover cursor-pointer"
                                 />
                             </PhotoView>
                             <div className="p-2 bg-black bg-opacity-50 text-white">
