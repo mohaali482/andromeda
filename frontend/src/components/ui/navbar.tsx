@@ -56,15 +56,17 @@ function MobileSidebar() {
                 </Button>
             </SheetTrigger>
             <SheetContent side="left">
-                <SheetTitle className="flex gap-2">
-                    <img
-                        src={Icon}
-                        className="object-cover"
-                        alt="Andromeda logo"
-                        width={24}
-                        height={24}
-                    />
-                    Andromeda
+                <SheetTitle>
+                    <Link to="/" className="flex gap-2">
+                        <img
+                            src={Icon}
+                            className="object-cover"
+                            alt="Andromeda logo"
+                            width={24}
+                            height={24}
+                        />
+                        Andromeda
+                    </Link>
                 </SheetTitle>
                 <SheetDescription />
                 <div className="grid gap-4 py-6">
